@@ -1,13 +1,14 @@
 const BaseController = require('./index');
 const UserModel = require('../models/userModel');
+
 class UserController {
 
 	static index = async (req, res, next) => {
 
 		let users = await UserModel.find({});
 		res.json(200, {
-			// users: users
-			requser: req.user
+			users: users
+			// requser: req.user
 		})
 	}
 

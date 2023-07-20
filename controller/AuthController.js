@@ -5,8 +5,36 @@ const AuthService = require('../Services/AuthService');
 class AuthController extends BaseController {
 	static required_fields = ['email', 'password'];
 
-	static login = (req, res, next) => {
-		
+	static login =  async (req, res, next) => {
+		let user = req.body
+		let validated = this.required_fields.every(field => 
+			user[field] != undefined && user[field] != "")
+
+		if(validated){
+			let mongoUser = await userModel.findOne({
+				email : user.email,
+				password: user.password
+
+		})
+
+			console.log(mongoUser);
+
+			if(mongoUser){
+				let token  = AuthService.generateToken(mongoUser);
+				res.status(200).json({
+					token: token
+				})
+			}else {
+				res.status(501).json({
+				message: "invalid credentials"
+			})
+			}
+
+		}else {
+			res.status(501).json({
+				message: "invalid credentials"
+			})
+		}
 
 	}
 
