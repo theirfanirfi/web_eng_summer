@@ -2,17 +2,30 @@ import React, {Component} from 'react';
 
 import logo from './logo.svg';
 import './App.css';
+
+import CounterComponent from './components/CounterComponent';
+
 class App extends Component {
 
-  state = {
+  constructor(props){
+    super(props);
+
+    this.state = {
     tvStatus: 'off',
   }
+
+  }
+
+
+
 
 componentDidMount(){
  // alert('this is Component did mount'); 
 }
 
-changeTvStatus = () => {
+
+
+changeTvStatus = (on_off) => {
   // if(this.state.tvStatus == 'off') {
   //   this.setState({
   //     tvStatus: 'on'
@@ -24,19 +37,31 @@ changeTvStatus = () => {
   // }
 
   this.setState({
-    tvStatus: this.state.tvStatus == 'off' ? 'on' : 'off'
+    tvStatus: on_off
   })
 }
 
+renderOffButton = () => {
+  return <button onClick={() => this.changeTvStatus('off')} >Off</button>
+}
+
+ renderOnButton = () => {
+  return <button onClick={() => this.changeTvStatus('on')} >On</button>
+}
+
   render(){
+    // this.setState({
+    //   tvStatus: 'on'
+    // })
     return (
       <div>
       <h1>TV status: {this.state.tvStatus}</h1>
-
-      <button onClick={this.changeTvStatus} >{
-        this.state.tvStatus == 'off' ? 'on' : 'off'
-      }</button>
-
+      {
+        this.state.tvStatus == 'off' ? 
+        this.renderOnButton() :
+        this.renderOffButton()
+      }
+      <CounterComponent tvStatus={this.state.tvStatus} hardCodedValue='Student' />
       </div>
       )
   }
