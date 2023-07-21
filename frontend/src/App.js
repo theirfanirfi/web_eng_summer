@@ -1,70 +1,37 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
 import logo from './logo.svg';
 import './App.css';
 
 import CounterComponent from './components/CounterComponent';
 
-class App extends Component {
+const App = () => {
+  const [tvStatus, setTvStatus] = useState(false);
+  const [counter, setCounter] = useState(0);
 
-  constructor(props){
-    super(props);
 
-    this.state = {
-    tvStatus: 'off',
+  const incrementCounter = (value) => {
+   console.log('vlaue is ', value);
+    setCounter(value);
   }
 
-  }
+  return (
+    <>
+    {console.log('tv status ', tvStatus)}
 
+    <h1>Parent Componet</h1>
+    <button onClick={() => setTvStatus(!tvStatus)}>Change TV Status: {tvStatus ? 'off' : 'on' }</button>
 
+    <CounterComponent tvStatus={tvStatus}
+    mycounter={counter}
+    myIncrementCounterFunction={incrementCounter}
+     hardCodedValue='@@@@@@@@@' />
 
-
-componentDidMount(){
- // alert('this is Component did mount'); 
-}
-
-
-
-changeTvStatus = (on_off) => {
-  // if(this.state.tvStatus == 'off') {
-  //   this.setState({
-  //     tvStatus: 'on'
-  //   })
-  // }else {
-  //   this.setState({
-  //     tvStatus: 'off'
-  //   })
-  // }
-
-  this.setState({
-    tvStatus: on_off
-  })
-}
-
-renderOffButton = () => {
-  return <button onClick={() => this.changeTvStatus('off')} >Off</button>
-}
-
- renderOnButton = () => {
-  return <button onClick={() => this.changeTvStatus('on')} >On</button>
-}
-
-  render(){
-    // this.setState({
-    //   tvStatus: 'on'
-    // })
-    return (
-      <div>
-      <h1>TV status: {this.state.tvStatus}</h1>
-      {
-        this.state.tvStatus == 'off' ? 
-        this.renderOnButton() :
-        this.renderOffButton()
-      }
-      <CounterComponent tvStatus={this.state.tvStatus} hardCodedValue='Student' />
-      </div>
-      )
-  }
+        <h3>Counter is: {counter}</h3>
+    
+    
+    </>
+    )
 }
 
 
