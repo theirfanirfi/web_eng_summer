@@ -40,6 +40,7 @@ class AuthController extends BaseController {
 
 	static signup = async (req, res, next) => {
 		let user = req.body;
+		console.log('user ', user);
 
 		let validated = this.required_fields.every(field => 
 			user[field] != undefined && user[field] != "")
@@ -50,15 +51,20 @@ class AuthController extends BaseController {
 				let token = AuthService.generateToken(userSaved);
 
 				res.status(200).json({
+					status: true,
 					token: token,
 				})
 			}else {
 				res.status(500).json({
+					status: false,
+
 					message: "Acccount creation failed"
 				})
 			}
 		}else {
 				res.status(401).json({
+					status: false,
+
 					message: "All fields must be provided."
 				})
 			}

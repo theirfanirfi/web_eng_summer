@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
-
-import logo from './logo.svg';
-import './App.css';
-import CounterComponent from './components/CounterComponent';
-
+import React from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Login from './pages/login'
+import SignUp from './pages/signup'
+import Home from './pages/HomePage'
 const App = () => {
-  const [photoId, setPhotoId] = useState(1);
-
-
  return( 
-  <>
-  <button onClick={() => setPhotoId(photoId+1) }>Change User</button>
-  <CounterComponent photoId={photoId} />
-  </>
+  <BrowserRouter>
+  <Routes>
+  <Route path="/" element={<Login />} />
+  <Route path="/signup" element={<SignUp />} />
+  <Route path="/home" element={<Home />} />
+  </Routes>
+  </BrowserRouter>
+
   )
 
 }
