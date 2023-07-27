@@ -2,10 +2,19 @@ import React, {useState} from 'react';
 
 import logo from './logo.svg';
 import './App.css';
-import DisplayPhotos from './components/DisplayPhotos';
+import CounterComponent from './components/CounterComponent';
 
 const App = () => {
-  return <DisplayPhotos />
+  const [photoId, setPhotoId] = useState(1);
+
+
+ return( 
+  <>
+  <button onClick={() => setPhotoId(photoId+1) }>Change User</button>
+  <CounterComponent photoId={photoId} />
+  </>
+  )
+
 }
 
 

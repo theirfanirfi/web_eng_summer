@@ -1,21 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Photo from './Photo';
 
-
+const PHOTOS_ENDPOINT = "https://jsonplaceholder.typicode.com/photos/";
 const CounterComponent = (props) => {
-	let [counter, setCounter] = useState(0);
-	
+	let [item, setItem] = useState({});
 
-	const incrementCounter = () => {
-		setCounter(counter+10);
-	}
+
+	useEffect(()=>{
+
+		fetch(PHOTOS_ENDPOINT+`/${props.photoId}`)
+		.then(res => res.json())
+		.then(res => setItem(res));
+
+	}, [props.photoId]);
 
 	return (
-		<>
-		<h1>It is a Counter Component</h1>
-		<h4>Counter: {counter}</h4>
-
-		<button onClick={()=> incrementCounter()} >Increment counter</button>
-		</>
+		<Photo item={item} />
 		)
 }
 
