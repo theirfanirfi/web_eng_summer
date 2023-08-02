@@ -1,13 +1,34 @@
 import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import Config from '../frontend_config';
 
 
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const navigation = useNavigate();
 
 
-const login = async () => {
+const login = () => {
+
+	let URL = `${Config.getBaseUrl()}auth/login`;
+	fetch(URL, {
+		method: 'POST',
+		body: JSON.stringify({email: email, password: password}),
+		headers: {
+			"Content-Type": "application/json"
+		}
+	})
+	.then(res => res.json())
+	.then(res => {
+		if(res.status){
+			localStorage.setItem('token', res.token);
+			navigation("/home");
+		}else {
+			alert(res.message);
+		}
+		console.log(res);
+	})
 
 } 
 
@@ -20,7 +41,7 @@ const login = async () => {
 		<input type="password" 
 		onChange={(text) => setPassword(text.target.value)}
 		 id="password" placeholder="password" />
-		<button>Login</button>
+		<button onClick={()=> login()}>Login</button>
 
 		<Link to="/signup">
 Don't have an Account? SignUp 

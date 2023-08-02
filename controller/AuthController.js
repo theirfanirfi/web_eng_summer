@@ -22,16 +22,19 @@ class AuthController extends BaseController {
 			if(mongoUser){
 				let token  = AuthService.generateToken(mongoUser);
 				res.status(200).json({
+					status: true,
 					token: token
 				})
 			}else {
 				res.status(501).json({
+					status: false,
 				message: "invalid credentials"
 			})
 			}
 
 		}else {
 			res.status(501).json({
+				status: false,
 				message: "invalid credentials"
 			})
 		}

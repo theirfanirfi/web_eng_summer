@@ -34,8 +34,9 @@ class UserController {
 
 	static get = async (req, res, next) => {
 		let id = req.params.id
-		let user = await UserModel.find({id: id});
-		res.json(200, {
+		let user = await UserModel.findOne({_id: id});
+		res.status(200).json({
+			status: true,
 			user: user
 		})
 	}

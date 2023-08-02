@@ -26,7 +26,7 @@ const Home = () => {
 			users.map((user, index) => {
 				return (
 				<li>
-				<Link to="/">{user.email}</Link>
+				<Link to={`/user/${user._id}`}>{user.email}</Link>
 				</li>
 				)
 			})
