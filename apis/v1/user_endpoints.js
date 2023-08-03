@@ -4,7 +4,7 @@ const UserController = require('../../controller/UserController');
 const PVM = require('../../middlewares/ParamValidationMiddleWare');
 const userRouter = express.Router();
 
-userRouter.use(PVM);
+// userRouter.use(PVM);
 
 userRouter.get('/', UserController.index);
 userRouter.get('/:id', UserController.get);
