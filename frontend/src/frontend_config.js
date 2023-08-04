@@ -1,7 +1,7 @@
 class Config {
 
 	static getBaseUrl(){
-		return "http://localhost:3002/"
+		return "http://localhost:3003/"
 	}
 
 

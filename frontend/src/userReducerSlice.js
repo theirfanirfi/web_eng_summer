@@ -2,33 +2,28 @@ import { createSlice } from '@reduxjs/toolkit'
 import Config from './frontend_config';
 
 export const userSlice = createSlice({
-	name: 'userSlice',
+	name: 'users',
 	initialState: {
-		users: []
+		users: 0
 	},
 
 	reducers: {
-		fetchUsers: (state) => {
-	
-			console.log('fetchUsers');
-			// state = {users: [{id: 1}]}
-			console.log(state.users);
-			let API_ENDPOINT = `${Config.getBaseUrl()}user/`;
-			fetch(API_ENDPOINT, {
-				headers:{
-					"Content-Type": "application/json",
-					"Authorization": ""
-				}
-			}).then(res => res.json())
-			.then(res => {
-				state = {...state , users: res.users};
-				console.log(state);
-				// return state;
-			})
+		incrementUser: (state) => {
+			state.users +=1
 		},
+
+		decrementUser: (state) => {
+			state.users -=1
+		},
+
+		incrementByNumber: (state, action) => {
+			console.log(action);
+			state.users += action.payload
+		}
+
 	},
 })
 
-export const {fetchUsers} = userSlice.actions;
+export const {incrementUser, decrementUser, incrementByNumber} = userSlice.actions;
 export default userSlice.reducer;
 
